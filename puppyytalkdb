@@ -1,0 +1,71 @@
+CREATE TABLE comments (
+  id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  post_id     INT UNSIGNED NOT NULL,
+  author_id   INT UNSIGNED NOT NULL,
+  content     TEXT NOT NULL,
+  created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  deleted_at  TIMESTAMP NULL DEFAULT null
+);
+
+describe comments;
+drop table comments;
+
+
+CREATE TABLE likes (
+  post_id     INT UNSIGNED NOT NULL,
+  user_id     INT UNSIGNED NOT NULL,
+  created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at  TIMESTAMP NULL DEFAULT null
+);
+
+describe likes;
+
+
+
+CREATE TABLE post_files (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  post_id INT UNSIGNED NOT NULL,
+  file_url VARCHAR(999) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at TIMESTAMP NULL DEFAULT NULL
+);
+
+describe post_files;
+
+
+
+CREATE TABLE posts (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  view_count INT UNSIGNED NOT NULL DEFAULT 0,
+  like_count INT UNSIGNED NOT NULL DEFAULT 0,
+  comment_count INT UNSIGNED NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  deleted_at TIMESTAMP NULL DEFAULT NULL
+);
+
+select * from posts;
+describe posts;
+drop table posts;
+
+
+CREATE TABLE users (
+    id                  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email               VARCHAR(255) NOT NULL UNIQUE,
+    password            VARCHAR(999) NOT NULL,
+    nickname            VARCHAR(255) NOT NULL UNIQUE,
+    profile_image_url   VARCHAR(999) NULL,
+    created_at          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at 			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at 			TIMESTAMP NULL DEFAULT NULL
+);
+
+select * from users;
+describe users;
+alter table users 
+rename column id to userid;
+drop table users;
